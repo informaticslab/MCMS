@@ -1,2 +1,2 @@
 # MCMS
-The IIU mobile content management system
+The IIU mobile content management system, sort of
