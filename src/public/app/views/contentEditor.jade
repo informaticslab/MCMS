@@ -1,0 +1,58 @@
+.row(style='background-color:#f2f2f2;')
+    .col-lg-12.col-md-12.col-sm-12
+            br
+            form
+                fieldset.form-group
+                   label(for='ArticleURL') Article URL:
+                        input#ArticleURL(type='text', name='ArticleURL', size='60' ng-model='article_url')
+                fieldset.form-group
+                   label(for='IssueDate') Issue Date:
+                        input#IssueDate(type='text', name='IssueDate', value='', size='12', contenteditable='false' ng-model='issue-date')
+                fieldset.form-group
+                   label(for='IssueVolume') Volume Number:
+                        input#IssueVolume(type='text', name='IssueVolume', value='', size='12', contenteditable='false' ng-model='issue-vol')
+                fieldset.form-group
+                   label(for='IssueNumber') Issue Number:
+                        input#IssueNumber(type='text', name='IssueNumber', value='', size='12', contenteditable='false', ng-model='issue-no')
+                fieldset.form-group
+                   label(for='IssueTitle') Article Title:
+                        textarea#IssueTitle(type='text', name='ArticleTitle', rows='2', cols='70', contenteditable='false' ng-model='title')
+                fieldset.form-group
+                    label(for='ArticleKeywords') Article Subjects:
+                            input#ArticleKeywords(type='text', name='ArticleKeywords', size='40', spellcheck='true' ng-model='tags')
+                            .instructions
+                                | Type a keyword, then hit Enter.  Surround "multi-word keywords" with quotation marks.
+                #bluebox
+                        .bluebox_topics_header Blue Box Topics
+                        p
+                            .label_above
+                                label.bluebox_topics(for='')
+                                    img(src='img/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
+                                    | What is
+                                    strong already known
+                                    |  on this topic?
+                                br
+                                textarea#AlreadyKnownInfo(type='text', rows='4', cols='70', contenteditable='false')
+                        p
+                            .label_above
+                                label.bluebox_topics(for='')
+                                    img(src='img/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
+                                    | What is
+                                    strong added
+                                    |  by this report?
+                                br
+                                textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='false')
+                        p
+                            .label_above
+                                label.bluebox_topics(for='')
+                                    img(src='img/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
+                                    | What are the
+                                    strong implications for public health practice
+                                    | ?
+                                br
+                                textarea#Implications(type='text', rows='4', cols='70', contenteditable='false')
+                br
+                br
+                button.btn.btn-primary.pull-right(type='submit') Submit
+
+.clear-divs
