@@ -1,0 +1,23 @@
+{
+  "name": "commSphere",
+  "version": "0.0.0",
+  "homepage": "https://github.com/informaticslab/commSphere",
+  "authors": [
+    "Kiet Ta <technical.ta@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "toastr": "~2.1.0"
+  },
+  "devDependencies": {
+    "angular-ui-grid": "~3.0.0-rc.21"
+  }
+}
