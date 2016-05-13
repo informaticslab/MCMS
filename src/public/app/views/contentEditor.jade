@@ -3,32 +3,34 @@
             br
             form
                 fieldset.form-group
-                   label(for='ArticleURL') Article URL:
-                        input#ArticleURL(type='text', name='ArticleURL', size='60' ng-model='article_url')
+                   label(for='ArticleURL') Article URL:&nbsp;
+                        input#ArticleURL(type='text', name='ArticleURL', size='60' ng-model='article_url' placeholder='Article Url')
                 fieldset.form-group
-                   label(for='IssueDate') Issue Date:
+                   label(for='IssueDate') Issue Date:&nbsp;
                         input#IssueDate(type='text', name='IssueDate', value='', size='12', contenteditable='false' ng-model='issue-date')
                 fieldset.form-group
-                   label(for='IssueVolume') Volume Number:
+                   label(for='IssueVolume') Volume Number:&nbsp;
                         input#IssueVolume(type='text', name='IssueVolume', value='', size='12', contenteditable='false' ng-model='issue-vol')
                 fieldset.form-group
-                   label(for='IssueNumber') Issue Number:
+                   label(for='IssueNumber') Issue Number:&nbsp;
                         input#IssueNumber(type='text', name='IssueNumber', value='', size='12', contenteditable='false', ng-model='issue-no')
                 fieldset.form-group
-                   label(for='IssueTitle') Article Title:
+                   label(for='IssueTitle') Article Title:&nbsp;
                         textarea#IssueTitle(type='text', name='ArticleTitle', rows='2', cols='70', contenteditable='false' ng-model='title')
                 fieldset.form-group
-                    label(for='ArticleKeywords') Article Subjects:
-                            input#ArticleKeywords(type='text', name='ArticleKeywords', size='40', spellcheck='true' ng-model='tags')
-                            .instructions
-                                | Type a keyword, then hit Enter.  Surround "multi-word keywords" with quotation marks.
+                        label.top_fields(for='ArticleKeywords') Article Subjects:
+                            input#ArticleKeywords.tagit-hidden-field(type='text', name='ArticleKeywords', size='40', spellcheck='true')
+                            ul.tagit.ui-widget.ui-widget-content.ui-corner-all
+                                li.tagit-new
+                                    input.ui-widget-content.ui-autocomplete-input(type='text', autocomplete='off')
+                                    span.ui-helper-hidden-accessible(role='status', aria-live='polite') No search results..
                 #bluebox
                         .bluebox_topics_header Blue Box Topics
                         p
                             .label_above
                                 label.bluebox_topics(for='')
                                     img(src='img/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
-                                    | What is
+                                    | What is&nbsp;
                                     strong already known
                                     |  on this topic?
                                 br
@@ -37,16 +39,16 @@
                             .label_above
                                 label.bluebox_topics(for='')
                                     img(src='img/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
-                                    | What is
+                                    | What id&nbsp;
                                     strong added
                                     |  by this report?
                                 br
-                                textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='false')
+                                textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='false' ng-model='added_by_report')
                         p
                             .label_above
                                 label.bluebox_topics(for='')
                                     img(src='img/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
-                                    | What are the
+                                    | What are the&nbsp;
                                     strong implications for public health practice
                                     | ?
                                 br
