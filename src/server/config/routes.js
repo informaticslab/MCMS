@@ -22,6 +22,8 @@ module.exports = function(app) {
   app.post('/api/fileUpload/delete', media.deleteFile);
   app.post('/api/fileUpload/update', media.updateFileChecked);
   app.get('/api/content/:appId', content.getContentByAppId);
+    app.get('/api/content/:appId/:issueDate', content.getContentByAppIdDate);
+  app.post('/api/content/save/:appId', content.saveContent);
 
 
   app.get('/partials/*', function(req, res) {
