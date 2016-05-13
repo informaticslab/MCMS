@@ -1,0 +1,96 @@
+.row(style='background-color:#f2f2f2;')
+    #branding
+    .header_image
+    img(src='images/branding.png', alt='MMWR Express Editor', title='MMWR Express Editor', border='0')
+    #header
+    .page_title Photon Admin JSON Generator
+    #white_div
+    br
+    form(action='')
+    p
+    label.top_fields(for='ArticleURL') Article URL:
+    input#ArticleURL(type='text', name='ArticleURL', size='60')
+    center
+    button#parseArticle(type='button') Auto Fetch Article
+    button#clearArticle(type='button') Clear Article
+    button#enableArticleEdit(type='button') Edit Article Fields
+    p
+    p
+    label.top_fields(for='IssueDate') Issue Date:
+    input#IssueDate.hasDatepicker(type='text', name='FirstName', value='', size='12', contenteditable='true')
+    p
+    label.top_fields(for='IssueVolume') Volume Number:
+    input#IssueVolume(type='text', name='LastName', value='', size='12', contenteditable='true')
+    p
+    label.top_fields(for='IssueNumber') Issue Number:
+    input#IssueNumber(type='text', name='IssueNumber', value='', size='12', contenteditable='true')
+    p
+    label.top_fields(for='IssueTitle') Article Title:
+    textarea#IssueTitle(type='text', name='ArticleTitle', rows='2', cols='70', contenteditable='true')
+    div
+    p
+    label.top_fields(for='ArticleKeywords') Article Subjects:
+    input#ArticleKeywords.tagit-hidden-field(type='text', name='ArticleKeywords', size='40', spellcheck='true')
+    ul.tagit.ui-widget.ui-widget-content.ui-corner-all
+    li.tagit-new
+    input.ui-widget-content.ui-autocomplete-input(type='text', autocomplete='off')
+    span.ui-helper-hidden-accessible(role='status', aria-live='polite') No search results.
+    .instructions
+    | Type a keyword, then hit Enter.  Surround "multi-word keywords" with quotation marks.
+    // <button name="AddKeyword" id="btnFoo">Add</button>
+    #bluebox
+    .bluebox_topics_header Blue Box Topics
+    p
+    .label_above
+    label.bluebox_topics(for='')
+    img(src='images/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
+    | What is
+    strong already known
+    |  on this topic?
+    br
+    textarea#AlreadyKnownInfo(type='text', rows='4', cols='70', contenteditable='true')
+    p
+    p
+    .label_above
+    label.bluebox_topics(for='')
+    img(src='images/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
+    | What is
+    strong added
+    |  by this report?
+    br
+    textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='true')
+    p
+    p
+    .label_above
+    label.bluebox_topics(for='')
+    img(src='images/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
+    | What are the
+    strong implications for public health practice
+    | ?
+    br
+    textarea#Implications(type='text', rows='4', cols='70', contenteditable='true')
+    p
+    #serialize_button(style='display: block;')
+    button#serializeButton(onclick="$Spelling.SpellCheckInWindow('ArticleKeywords')") Serialize Form Values
+    div(style='clear:both;')
+    p
+    .json
+    label.top_fields(for='') JSON Blurb:
+    textarea#JSONBlurb(type='text', name='JSONBlurb', rows='7', cols='73', spellcheck='true')
+    br
+    #serialize_message.serialize_message(style='display: block;')
+    | Please copy (Control+C) and paste the JSON Blob into the
+    a(href='http://toolsadmin.cdc.gov') CDC Content Syndication Service Admin Site
+    | .
+    // <button name="AddKeyword" id="btnFoo">Add</button>
+    p
+    // <div id="subscription"><a href="http://toolsadmin.cdc.gov">CDC Subscription Service</a></div>
+    div(style='clear:both;')
+    br
+    br
+    br
+    | Article Parser:
+    input(type='radio', name='whatOrigin', value='whatorigin', checked='')
+    | Whatever Origin
+    input(type='radio', name='whatOrigin', value='edemo')
+    | EDemo.

@@ -9,7 +9,7 @@ exports.uploadFile = function(req,res) {
 	var collection = mongo.mongodb.collection('uploads');
 	var modifiedPath = req.files.file.path;
 	// var re = new RegExp('[\/][i][m][g]\s*([^\n\r]*)');
-	modifiedPath = modifiedPath.substring(modifiedPath.indexOf('/img'));
+	modifiedPath = modifiedPath.substring(modifiedPath.indexOf('/images'));
 	//console.log(req.body);
 	//console.log('modified path ' + modifiedPath);
 

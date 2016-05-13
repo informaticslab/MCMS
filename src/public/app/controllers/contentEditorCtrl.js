@@ -1,14 +1,14 @@
-angular.module('app').controller('createContentCtrl', function($scope, $http, $filter, $route, ngNotifier, ngIdentity, ngUser, $log, $q) {
+angular.module('app').controller('contentEditorCtrl', function($scope, $http, $filter, $route, ngNotifier, ngIdentity, ngUser, $log, $q) {
 $scope.identity = ngIdentity;
 $scope.minColWidth = 110;
 $scope.minTopicWidth = 500;
 var secondUnit = 1000;
 
 $scope.contentdoc = {
-    "issue-date": "",
-    "issue-vol": "",
-    "issue-no": "",
-    "title" :"",
+    "issue_date": null,
+    "issue_vol": null,
+    "issue_no": null,
+    "title" :"this is a test",
     "already_known"    : "",
     "added_by_report" : "",
     "implication"   : "",
@@ -19,6 +19,7 @@ $scope.contentdoc = {
     "command" :"",
     "user_created": "",
     "date_created": "",
+    "content_body": ""
 };
 
 $scope.onTimeSet = function (newDate, oldDate) {
@@ -27,9 +28,12 @@ $scope.onTimeSet = function (newDate, oldDate) {
 }
 
   $scope.date = new Date().getTime(); // need both date and time
+    // dummy hardcoded data pending authentication
+    //$scope.identity.currentUser._id = '1';
+    //$scope.identity.currentUser.displayName = 'Trung Nguyen';
 
   //create an object with ID and displayName for user_created.
-  $scope.contentdoc.user_created = {id:$scope.identity.currentUser._id, displayName: $scope.identity.currentUser.displayName};
+  //$scope.contentdoc.user_created = {id:$scope.identity.currentUser._id, displayName: $scope.identity.currentUser.displayName};
 
 $scope.saveContent = function()
 {

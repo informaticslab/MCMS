@@ -49,7 +49,8 @@ mcmsApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider,$locationProvider) {
     $routeProvider.
     when('/', {
-        templateUrl: '/partials/contentEditor'
+        templateUrl: '/partials/contentEditor',
+        controller:'contentEditorCtrl'
     }).
     when('/admin', {
         templateUrl: '/partials/admin',

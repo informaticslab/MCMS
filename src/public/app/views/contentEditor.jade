@@ -1,60 +1,70 @@
 .row(style='background-color:#f2f2f2;')
     .col-lg-12.col-md-12.col-sm-12
             br
-            form
-                fieldset.form-group
-                   label(for='ArticleURL') Article URL:&nbsp;
-                        input#ArticleURL(type='text', name='ArticleURL', size='60' ng-model='article_url' placeholder='Article Url')
-                fieldset.form-group
-                   label(for='IssueDate') Issue Date:&nbsp;
-                        input#IssueDate(type='text', name='IssueDate', value='', size='12', contenteditable='false' ng-model='issue-date')
-                fieldset.form-group
-                   label(for='IssueVolume') Volume Number:&nbsp;
-                        input#IssueVolume(type='text', name='IssueVolume', value='', size='12', contenteditable='false' ng-model='issue-vol')
-                fieldset.form-group
-                   label(for='IssueNumber') Issue Number:&nbsp;
-                        input#IssueNumber(type='text', name='IssueNumber', value='', size='12', contenteditable='false', ng-model='issue-no')
-                fieldset.form-group
-                   label(for='IssueTitle') Article Title:&nbsp;
-                        textarea#IssueTitle(type='text', name='ArticleTitle', rows='2', cols='70', contenteditable='false' ng-model='title')
-                fieldset.form-group
-                        label.top_fields(for='ArticleKeywords') Article Subjects:
-                            input#ArticleKeywords.tagit-hidden-field(type='text', name='ArticleKeywords', size='40', spellcheck='true')
-                            ul.tagit.ui-widget.ui-widget-content.ui-corner-all
-                                li.tagit-new
-                                    input.ui-widget-content.ui-autocomplete-input(type='text', autocomplete='off')
-                                    span.ui-helper-hidden-accessible(role='status', aria-live='polite') No search results..
-                #bluebox
-                        .bluebox_topics_header Blue Box Topics
-                        p
-                            .label_above
-                                label.bluebox_topics(for='')
-                                    img(src='img/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
-                                    | What is&nbsp;
-                                    strong already known
-                                    |  on this topic?
-                                br
-                                textarea#AlreadyKnownInfo(type='text', rows='4', cols='70', contenteditable='false')
-                        p
-                            .label_above
-                                label.bluebox_topics(for='')
-                                    img(src='img/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
-                                    | What id&nbsp;
-                                    strong added
-                                    |  by this report?
-                                br
-                                textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='false' ng-model='added_by_report')
-                        p
-                            .label_above
-                                label.bluebox_topics(for='')
-                                    img(src='img/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
-                                    | What are the&nbsp;
-                                    strong implications for public health practice
-                                    | ?
-                                br
-                                textarea#Implications(type='text', rows='4', cols='70', contenteditable='false')
-                br
-                br
-                button.btn.btn-primary.pull-right(type='submit') Submit
+            fieldset.form-group
+                label(for='ArticleURL') Article URL:&nbsp;
+                input#ArticleURL.form-control(type='text', name='ArticleURL', size='60'  placeholder='Article Url' ng-model='contentdoc.article_url')
+            fieldset.form-group
+                label Issue Date:
+                    .dropdown(style="position:relative; z-index:900 ; width:200px" )
+                        a#dropdown2(role='button', data-toggle='dropdown', data-target='#', href='')
+                            .input-group
+                                div.form-control(type='text')
+                                    | {{contentdoc.issue_date | date:'MMM d, yyyy'}}
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-calendar
+                        ul.dropdown-menu(role='menu', aria-labelledby='dLabel')
+                            datetimepicker(data-on-set-time="issueDateChanged(newDate, oldDate)" data-ng-model='contentdoc.issue_date', data-datetimepicker-config="{ dropdownSelector: '#dropdown2',startView:'day', minView:'day' }")
+            fieldset.form-group
+                label(for='IssueVolume') Volume Number:&nbsp;
+                input#IssueVolume.form-control(type='text', name='IssueVolume', ng-model='contentdoc.issue_vol' style="width:200px")
+            fieldset.form-group
+                label(for='IssueNumber') Issue Number:&nbsp;
+                input#IssueNumber.form-control(type='text', name='IssueNumber',  ng-model='contentdoc.issue_no' style="width:200px")
+            fieldset.form-group
+                label(for='IssueTitle') Article Title:&nbsp;
+                textarea#IssueTitle.form-control(type='text', name='ArticleTitle', rows='2', cols='70' ng-model="contentdoc.title")
+            fieldset.form-group
+                label(for='ArticleKeywords') Article Subjects:
+                input#ArticleKeywords.tagit-hidden-field.form-control(type='text', name='ArticleKeywords', size='40', spellcheck='true')
+                ul.tagit.ui-widget.ui-widget-content.ui-corner-all
+                    li.tagit-new
+                        input.ui-widget-content.ui-autocomplete-input(type='text', autocomplete='off')
+                        span.ui-helper-hidden-accessible(role='status', aria-live='polite') No search results..
+            fieldset.form-group
+                label(for='ArticleBody') Article Body:
+                textarea#ArticleBody.form-control(type="text" name="ArticleBody", spellcheck=true, ng-model="contentdoc.content_body" rows=10 cols=80)
+            #bluebox
+                    .bluebox_topics_header Blue Box Topics
+                    p
+                        .label_above
+                            label.bluebox_topics(for='')
+                                img(src='images/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
+                                | What is&nbsp;
+                                strong already known
+                                |  on this topic?
+                            br
+                            textarea#AlreadyKnownInfo(type='text', rows='4', cols='70', contenteditable='false' ng-model='contentdoc.already_known')
+                    p
+                        .label_above
+                            label.bluebox_topics(for='')
+                                img(src='images/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
+                                | What id&nbsp;
+                                strong added
+                                |  by this report?
+                            br
+                            textarea#AddedInfo(type='text', rows='4', cols='70', contenteditable='false' ng-model='contentdoc.added_by_report')
+                    p
+                        .label_above
+                            label.bluebox_topics(for='')
+                                img(src='images/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
+                                | What are the&nbsp;
+                                strong implications for public health practice
+                                | ?
+                            br
+                            textarea#Implications(type='text', rows='4', cols='70', contenteditable='false' ng-model='contentdoc.implications')
+            br
+            br
+            button.btn.btn-primary.pull-right(type='submit') Submit
 
 .clear-divs
