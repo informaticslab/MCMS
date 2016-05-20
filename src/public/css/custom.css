@@ -2,7 +2,6 @@
 body {
 
     margin: 0 auto;
-    max-width: 800px;
     padding-top: 0px;
     color:#777777;
 
@@ -86,7 +85,18 @@ label
     display: inline-block;
 }
 
+.create-new-article-cont {
+    float: left;
+    position: relative;
+    margin: 0 0 10px 30px;
+}
 
+.create-article-button {
+    float:right;
+    position:relative;
+    margin-top:20px;
+    margin-right:20px;
+}
 
 /* THIS IS FOR COMMSPHERE -KEEP!-*/
 
@@ -239,39 +249,6 @@ margin-top: 0px;
 
 
 
-/*-charts section*/
-
-.chart-legend li span{
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 5px;
-    
-    top : -50px;
-}
-
-.hidden-chart {
-  display:none;
-}
-
-#metric-table-row{
-  background-color:#c6d8ae
-}
-
-.line-legend {
-  list-style-type: none;
-}
-
-.padding-fix {
-  margin-left: -20px;
-}
-
-.notes {
-    font-size:13px;
-    font-style: italic;
-}
-
-
 /* CHECK BOX STYLE */
 input[type=checkbox].css-checkbox {
               position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
@@ -295,7 +272,7 @@ input[type=checkbox].css-checkbox {
               background-position: 0 -29px;
             }
             label.css-label {
-        background-image:url('../images/checkbox-sprite.png');
+        background-image:url('../img/checkbox-sprite.png');
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;

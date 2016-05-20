@@ -129,7 +129,7 @@ $(document).ready(function(){
 
 
 
-    $("#clearArticle").click(function(event){
+    $("#clearArticle").click(function(article){
         $("#ArticleURL").val("");
         $('#ArticleKeywords').tagit('removeAll');
         $("#IssueTitle").val("");

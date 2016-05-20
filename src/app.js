@@ -13,16 +13,16 @@ var config = require('./server/config/config'); //may pass env later
 require('./server/config/express')(app, config);
 //mongoose goes here
 // passport goes here
-require('./server/config/mongoose')(config);
+//require('./server/config/mongoose')(config);
 
-require('./server/config/passport')();
+//require('./server/config/passport')();
 
 require('./server/config/routes.js')(app);
 
 var moment = require('moment');
 
-app.listen(9001);
-console.log('Express server listening on port 9001');
+app.listen(9090);
+console.log('Express server listening on port 9090');
 
 
 

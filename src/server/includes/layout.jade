@@ -10,15 +10,49 @@ html(lang="en" ng-app="app")
     link(rel="stylesheet" href="/vendor/toastr/toastr.css")
     link(rel="stylesheet" href="/css/animation.css")
     link(rel="stylesheet" href="/css/sb-admin.css")
-    link(rel="stylesheet" href="/css/jquery-tagit.css")
-    link(rel="stylesheet" href="/css/tagit-ui-zendesk.css")
+    //link(rel="stylesheet" href="http://mbenford.github.io/ngTagsInput/css/ng-tags-input.min.css")
+    link(rel="stylesheet" href="/vendor/ng-tags-input/ng-tags-input.min.css")
 
     link(rel="stylesheet" href="/css/login.css")
     link(rel="stylesheet" href="/css/datetimepicker.css")
     link(rel="stylesheet" href="/vendor/bootstrap-sweetalert/lib/sweet-alert.css")
     link(rel="stylesheet" href="/vendor/angular-multi-select/isteven-multi-select.css")
   body(ng-controller='rootCtrl')
-     block main-content
+      #wrapper
+          // Navigation
+          nav.navbar.navbar-inverse.navbar-fixed-top.ng-cloak(role='navigation')
+              // Brand and toggle get grouped for better mobile display
+              .navbar-header.ng-cloak
+                 // img(src='img/comm-serve-logo.png', height='71', width='234')
+              // Top Menu Items
+              .create-article-button
+                  button.btn.btn-primary.ng-cloak(type='button' ng-click="createArticle('lg',null,true)") Create New Article
+              // Sidebar Menu Items - These collapse to the responsive navigation menu on small screens
+              .collapse.navbar-collapse.navbar-ex1-collapse.ng-cloak
+                  ul.nav.navbar-nav.side-nav.ng-cloak
+                      li.side-nav-search
+                          .col-md-12
+                              .right-inner-addon
+                                  i.fa.fa-fw.fa-search
+                                  input.form-control(ng-model="searchText" type='search', placeholder='Search Articles', style='background-color:#44474c; border: 1px thin; border-color:#212328; color:#aeaeae; font-weight:normal;')
+                      li.side-nav-main-tab
+                          i.fa.fa-fw.fa-home
+                          |   MAIN
+                      li(ng-class="{active:activeMenu=='dashboard'}")
+                          a(href='/#/') Available Articles
+                          br
+                      li
+                          a(href='/#/admin' ng-show="identity.isAuthorized('levelTwo')") Admin
+                      li
+                          a(href='' ng-click='logout()')
+                              | Logout
+                              i.fa.fa-fw.fa-power-off
+                      li.side-nav-cdc-logo
+                          img(src='img/cdc-logo.png', height='60', width='144')
+                      li.side-nav-iiu-logo
+                          img(src='img/iiu-logo.png', height='33', width='207')
+              // /.navbar-collapse
+          block main-content
 
 
 

@@ -1,5 +1,7 @@
-.row(style='background-color:#f2f2f2;')
-    .col-lg-12.col-md-12.col-sm-12
+#page-wrapper(ng-show="contentloaded")
+    .container-fluid
+        .row(style='width:70%; margin:auto')
+            .col-lg-12.col-md-12.col-sm-12
             br
             fieldset.form-group
                 label(for='ArticleURL') Article URL:&nbsp;
@@ -25,12 +27,8 @@
                 label(for='IssueTitle') Article Title:&nbsp;
                 textarea#IssueTitle.form-control(type='text', name='ArticleTitle', rows='2', cols='70' ng-model="contentdoc.title")
             fieldset.form-group
-                label(for='ArticleKeywords') Article Subjects:
-                input#ArticleKeywords.tagit-hidden-field.form-control(type='text', name='ArticleKeywords', size='40', spellcheck='true')
-                ul.tagit.ui-widget.ui-widget-content.ui-corner-all
-                    li.tagit-new
-                        input.ui-widget-content.ui-autocomplete-input(type='text', autocomplete='off')
-                        span.ui-helper-hidden-accessible(role='status', aria-live='polite') No search results..
+                label Article Subjects:
+                tags-input(ng-model='contentdoc.tags' display-property="tag")
             fieldset.form-group
                 label(for='ArticleBody') Article Body:
                 textarea#ArticleBody.form-control(type="text" name="ArticleBody", spellcheck=true, ng-model="contentdoc.content_body" rows=10 cols=80)
@@ -39,7 +37,7 @@
                     p
                         .label_above
                             label.bluebox_topics(for='')
-                                img(src='images/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
+                                img(src='img/blue_bubble.png', style='padding-right:.4em;', alt='What is already known on this topic?', title='What is already known on this topic?')
                                 | What is&nbsp;
                                 strong already known
                                 |  on this topic?
@@ -48,7 +46,7 @@
                     p
                         .label_above
                             label.bluebox_topics(for='')
-                                img(src='images/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
+                                img(src='img/orange_bubble.png', style='padding-right:.4em;', alt='What is added by this report?', title='What is added by this report?')
                                 | What id&nbsp;
                                 strong added
                                 |  by this report?
@@ -57,7 +55,7 @@
                     p
                         .label_above
                             label.bluebox_topics(for='')
-                                img(src='images/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
+                                img(src='img/green_bubble.png', style='padding-right:.4em;', alt='What are the implications for public health practice?', title='What are the implications for public health practice?')
                                 | What are the&nbsp;
                                 strong implications for public health practice
                                 | ?

@@ -1,16 +1,16 @@
 angular.module('app').controller('adminCtrl', function($scope, $log, ngNotifier, $http, ngUser,$route,$modal) {
-	$scope.eventTypeValue = {};
+	$scope.articleTypeValue = {};
 	$scope.categoryValue = {};
 
 	$scope.users = ngUser.query();
 
-	$http.get('/api/eventTypes').then(function(res) {
-		$scope.eventListDoc = res.data[0];
-		if ($scope.eventListDoc == undefined) {  //default
-			$scope.eventListDoc = {
-				eventTypeList: [{
+	$http.get('/api/articleTypes').then(function(res) {
+		$scope.articleListDoc = res.data[0];
+		if ($scope.articleListDoc == undefined) {  //default
+			$scope.articleListDoc = {
+				articleTypeList: [{
 					'name': 'Current Types',
-					eventTypes: []
+					articleTypes: []
 				}]
 			};
 		}
@@ -53,8 +53,8 @@ angular.module('app').controller('adminCtrl', function($scope, $log, ngNotifier,
 		//console.log(user);
 	};
 
-	$scope.saveEventTypes = function() {
-		$http.post('/api/eventTypes', $scope.eventListDoc).then(function(res) {
+	$scope.savearticleTypes = function() {
+		$http.post('/api/articleTypes', $scope.articleListDoc).then(function(res) {
 			console.log(res.data.success);
 			// if (res.data.success) {
    //              console.log(res.data);
@@ -64,40 +64,40 @@ angular.module('app').controller('adminCtrl', function($scope, $log, ngNotifier,
 		});
 	};
 
-	$scope.addEvent = function(eventTypeList, e) {
-		//$log.debug(eventTypeList);
-		var eventTypeName = $scope.eventTypeValue[eventTypeList.name];
-		if (eventTypeName.length > 0) {
-			eventTypeList.eventTypes.push({name:eventTypeName});
+	$scope.addarticle = function(articleTypeList, e) {
+		//$log.debug(articleTypeList);
+		var articleTypeName = $scope.articleTypeValue[articleTypeList.name];
+		if (articleTypeName.length > 0) {
+			articleTypeList.articleTypes.push({name:articleTypeName});
 		}
-		console.log(eventTypeName);
-		ngNotifier.notify("Event types list has been updated!");
-		$scope.eventTypeValue = {};
-		e.preventDefault();
+		console.log(articleTypeName);
+		ngNotifier.notify("article types list has been updated!");
+		$scope.articleTypeValue = {};
+		e.prarticleDefault();
 	};
 
-	$scope.editEvent = function(eventType) {
-		$log.debug(eventType);
-		eventType.editing = true;
-		console.log(eventType.editing);
+	$scope.editarticle = function(articleType) {
+		$log.debug(articleType);
+		articleType.editing = true;
+		console.log(articleType.editing);
 	};
 
-	$scope.cancelEditingEvent = function(eventType) {
-		eventType.editing = false;
+	$scope.cancelEditingarticle = function(articleType) {
+		articleType.editing = false;
 	};
 
-	$scope.saveEvent = function(eventType, e) {
+	$scope.savearticle = function(articleType, e) {
 		// topic.save();
-		eventType.editing = false;
-		ngNotifier.notify("Event types list has been updated!");
-		e.preventDefault();
+		articleType.editing = false;
+		ngNotifier.notify("article types list has been updated!");
+		e.prarticleDefault();
 	};
 
-	$scope.removeEvent = function(eventTypeList, event) {
-		var index = eventTypeList.eventTypes.indexOf(event);
+	$scope.removearticle = function(articleTypeList, article) {
+		var index = articleTypeList.articleTypes.indexOf(article);
 		if (index > -1) {
-			eventTypeList.eventTypes.splice(index, 1)[0];
-			ngNotifier.notify("Event types list has been updated!");
+			articleTypeList.articleTypes.splice(index, 1)[0];
+			ngNotifier.notify("article types list has been updated!");
 		}
 	};
 
@@ -115,7 +115,7 @@ angular.module('app').controller('adminCtrl', function($scope, $log, ngNotifier,
 
 
 	$scope.addCategory = function(categoryList, e) {
-		//$log.debug(eventTypeList);
+		//$log.debug(articleTypeList);
 		var categoryName = $scope.categoryValue[categoryList.name];
 		if (categoryName.length > 0) {
 			categoryList.categories.push({name:categoryName,

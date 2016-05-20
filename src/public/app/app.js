@@ -5,9 +5,8 @@ var mcmsApp = angular.module('app', [
   ,'ngSanitize'
   ,'LocalStorageModule'
   ,'ui.bootstrap'
-  ,'isteven-multi-select'
   ,'ui.bootstrap.datetimepicker'
-  ,'ngFileUpload'
+  ,'ngTagsInput'
 
 ]);
 
@@ -49,6 +48,10 @@ mcmsApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider,$locationProvider) {
     $routeProvider.
     when('/', {
+        templateUrl: '/partials/dashboard',
+        controller:'dashCtrl'
+    }).
+    when('/article/:articleId', {
         templateUrl: '/partials/contentEditor',
         controller:'contentEditorCtrl'
     }).

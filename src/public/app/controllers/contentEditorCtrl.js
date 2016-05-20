@@ -1,26 +1,20 @@
-angular.module('app').controller('contentEditorCtrl', function($scope, $http, $filter, $route, ngNotifier, ngIdentity, ngUser, $log, $q) {
+angular.module('app').controller('contentEditorCtrl', function($scope, $http, $filter, $route,$routeParams, ngNotifier, ngIdentity, ngUser, $log, $q) {
 $scope.identity = ngIdentity;
 $scope.minColWidth = 110;
 $scope.minTopicWidth = 500;
-var secondUnit = 1000;
+var secondUnit = 1000
+    $scope.appId = 'mmwr_express';
 
-$scope.contentdoc = {
-    "issue_date": "2016-05-11",
-    "issue_vol": '65',
-    "issue_no": '18',
-    "title" :"this is a test",
-    "already_known"    : "aa",
-    "added_by_report" : "bb",
-    "implications"   : "cc",
-    "tags"          : ["key1", "key2", "key3"],
-    "article_url" :"",
-    "content-ver" : "",
-    "schema-ver"  :"",
-    "command" :"",
-    "user_created": "trung",
-    "date_created": "",
-    "content_body": "this is a test"
-};
+
+$scope.contentdoc=null;
+
+    $http.get('/api/content/internal/'+ $scope.appId + '/' +$routeParams.articleId).then(function(res){
+        if (res.data) {
+            $scope.contentdoc = res.data[0];
+            $scope.contentloaded = true;
+
+        }
+    });
 
 $scope.onTimeSet = function (newDate, oldDate) {
     console.log(newDate);
@@ -50,7 +44,7 @@ $scope.saveContent = function()
     }
     $http.post('/api/content/save/mmwr_express', $scope.contentdoc).then(function(res) {
        if (res.data.success) {
-         ngNotifier.notify("content has been created!");
+         ngNotifier.notify(res.data.success);
        }
        else {
          alert('there was an error');

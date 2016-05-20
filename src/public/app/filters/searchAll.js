@@ -1,22 +1,22 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts"/>
 // custom search filter for active dashboard
 mcmsApp.filter('searchAll', function($filter) {
-  return function(instances,searchText) {
+  return function(articles, searchText) {
     var searchRegx = new RegExp(searchText, "i");
     if (searchText == undefined || searchText == ''){
-        return instances;
+        return articles;
     }
     var result = [];
-    if (instances) {
-    for(i = 0; i < instances.length; i++) {
-            if ((instances[i].eventName==null?false:instances[i].eventName.toString().search(searchRegx) !== -1) ||
-                (instances[i].eventInstanceId==null?false:instances[i].eventInstanceId.toString().search(searchRegx) !== -1) ||
-                (instances[i].eventType == null? false: instances[i].eventType.toString().search(searchRegx) !== -1) ||
-                (instances[i].user_created.displayName ==null?false:instances[i].user_created.displayName.toString().search(searchRegx) !== -1) ||
-                (instances[i].eventInstanceStatus == null?false:instances[i].eventInstanceStatus.toString().search(searchRegx) !== -1) ||
-                $filter('date')(new Date(instances[i].date_created),'MM/dd/yyyy').search(searchRegx) != -1)
+    if (articles) {
+    for(i = 0; i < articles.length; i++) {
+            if ((articles[i].title==null?false:articles[i].title.toString().search(searchRegx) !== -1) ||
+                (articles[i].issue_vol ==null?false:articles[i].issue_vol.toString().search(searchRegx) !== -1) ||
+                (articles[i].issue_no ==null?false:articles[i].issue_no.toString().search(searchRegx) !== -1) ||
+                (articles[i].user_created ==null?false:articles[i].user_created.toString().search(searchRegx) !== -1) ||
+                (articles[i].tags ==null?false:articles[i].tags.toString().search(searchRegx) !== -1) ||
+                $filter('date')(new Date(articles[i].issue_date),'MM/dd/yyyy').search(searchRegx) != -1)
                 {
-            result.push(instances[i]);
+            result.push(articles[i]);
             }
         }
     }
