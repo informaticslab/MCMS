@@ -27,6 +27,7 @@ module.exports = function(app) {
   app.get('/api/content/:appId/lastUpdate/:updatedDate', content.getContentByAppIdLastUpdate);
   app.get('/api/content/internal/:appId/:articleId',content.getContentByAppIdArticleId);
   app.post('/api/content/save/:appId', content.saveContent);
+  app.post('/api/content/update/:appId', content.updateContent);
 
 
   app.get('/partials/*', function(req, res) {

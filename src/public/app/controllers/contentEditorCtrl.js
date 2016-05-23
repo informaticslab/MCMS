@@ -11,6 +11,7 @@ $scope.contentdoc=null;
     $http.get('/api/content/internal/'+ $scope.appId + '/' +$routeParams.articleId).then(function(res){
         if (res.data) {
             $scope.contentdoc = res.data[0];
+            $scope.contentdocBkup = JSON.parse(JSON.stringify(res.data[0]));
             $scope.contentloaded = true;
 
         }
@@ -29,31 +30,37 @@ $scope.onTimeSet = function (newDate, oldDate) {
   //create an object with ID and displayName for user_created.
   //$scope.contentdoc.user_created = {id:$scope.identity.currentUser._id, displayName: $scope.identity.currentUser.displayName};
 
-$scope.saveContent = function()
-{
-  // saving the document here
-    $scope.contentdoc.date_created = $scope.date;
-    if ($scope.contentdoc.issue_date.toString() === '') {
-        ngNotifier.notifyError('Issue Date cannot be blank');
-    }
-    else if ($scope.contentdoc.issue_vol === '') {
-        ngNotifier.notifyError('Issue Volumne cannot be blank');
-    }
-    else if ($scope.contentdoc.issue_no === ''){
-        ngNotifier.notifyError('Issue No cannot be blank event if this is an early release');
-    }
-    $http.post('/api/content/save/mmwr_express', $scope.contentdoc).then(function(res) {
-       if (res.data.success) {
-         ngNotifier.notify(res.data.success);
-       }
-       else {
-         alert('there was an error');
-       }
-     });
-    
-}
 
 
+    $scope.updateContent = function() {
+        // update the document here
+        console.log('content ', $scope.contentdoc);
+        console.log('backup ', $scope.contentdocBkup);
+        if ($scope.contentdoc.date_created == null) {
+            $scope.contentdoc.date_created = new Date().getTime();
+        }
+        if ($scope.contentdoc != $scope.contentdocBkup) {  // the original data was changed.  updating
+                $scope.contentdoc.date_updated = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        }
+        if ($scope.contentdoc.issue_date.toString() === '') {
+            ngNotifier.notifyError('Issue Date cannot be blank');
+        }
+        else if ($scope.contentdoc.issue_vol === '') {
+            ngNotifier.notifyError('Issue Volumne cannot be blank');
+        }
+        else if ($scope.contentdoc.issue_no === ''){
+            ngNotifier.notifyError('Issue No cannot be blank event if this is an early release');
+        }
+        $http.post('/api/content/update/mmwr_express', $scope.contentdoc).then(function(res) {
+            if (res.data.success) {
+                ngNotifier.notify(res.data.success);
+            }
+            else {
+                alert('there was an error');
+            }
+        });
+
+    }
 
 
 

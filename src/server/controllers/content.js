@@ -85,18 +85,20 @@ exports.getContentByAppIdLastUpdate = function(req,res) {
 //	connection.end();
 }
 exports.saveContent = function(req,res) {
+    console.log('save content called');
     var appId = req.params.appId;
     var content = req.body;
     var content_id = content.content_id;
     console.log(content);
     content.tags = serialize(content.tags);
-    db.query('insert into mmwr_express set ? on duplicate key update ?',[content,content],function(err,result){
+    //db.query('insert into mmwr_express set ? on duplicate key update ?',[content,content],function(err,result){
+    db.query('insert into mmwr_express set ? ',[content],function(err,result){
         if(err) {
             console.log(err);
             res.send(err);
         }
         else {
-            res.send({'success':'content added / updated','contentId': result.insertId});
+            res.send({'success':'content added','contentId': result.insertId});
         }
     })
 
@@ -130,28 +132,21 @@ exports.getContentByAppIdArticleId = function(req,res) {
 //	connection.end();
 }
 exports.updateContent = function(req,res) {
+    console.log('update content called');
+    var appId = req.params.appId;
     var content = req.body;
-    var currentId = content.replaceCurrent;
-    delete content.replaceCurrent;
-
     var content_id = content.content_id;
+    content.tags = serialize(content.tags);
     // setup a transaction to make sure that all db operation completed with no error
-    db.beginTransaction(function(err) {
-        if (err) { throw err; }
-        db.query('update ? set ? where content_id = ?;',[appId,content,content_id],function(err,updateResult){
+    db.query('update ' + appId + ' set ? where content_id = ?;',[content,content_id],function(err,updateResult){
             if (err) {
-                throw err;
-                return db.rollback(function() {
-
-                });
+                console.log(err);
+                res.send(err);
             }
             else {
-                res.send({'success':true});
+                res.send({'success':'content update'});
             }
-
-        });
     });
-
 }
 
 function reformatRows(rows,internal){
