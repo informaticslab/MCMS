@@ -89,7 +89,11 @@ exports.saveContent = function(req,res) {
     var appId = req.params.appId;
     var content = req.body;
     var content_id = content.content_id;
-    console.log(content);
+    //console.log(content);
+
+    content.content_ver = '1';
+    content.schema_ver = '1';
+    content.command = 'add';
     content.tags = serialize(content.tags);
     //db.query('insert into mmwr_express set ? on duplicate key update ?',[content,content],function(err,result){
     db.query('insert into mmwr_express set ? ',[content],function(err,result){

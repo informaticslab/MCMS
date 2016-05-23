@@ -34,8 +34,8 @@ $scope.onTimeSet = function (newDate, oldDate) {
 
     $scope.updateContent = function() {
         // update the document here
-        console.log('content ', $scope.contentdoc);
-        console.log('backup ', $scope.contentdocBkup);
+        //console.log('content ', $scope.contentdoc);
+        //console.log('backup ', $scope.contentdocBkup);
         if ($scope.contentdoc.date_created == null) {
             $scope.contentdoc.date_created = new Date().getTime();
         }
@@ -51,15 +51,16 @@ $scope.onTimeSet = function (newDate, oldDate) {
         else if ($scope.contentdoc.issue_no === ''){
             ngNotifier.notifyError('Issue No cannot be blank event if this is an early release');
         }
-        $http.post('/api/content/update/mmwr_express', $scope.contentdoc).then(function(res) {
-            if (res.data.success) {
-                ngNotifier.notify(res.data.success);
-            }
-            else {
-                alert('there was an error');
-            }
-        });
-
+        else {
+            $http.post('/api/content/update/mmwr_express', $scope.contentdoc).then(function (res) {
+                if (res.data.success) {
+                    ngNotifier.notify(res.data.success);
+                }
+                else {
+                    alert('there was an error');
+                }
+            });
+        }
     }
 
 
