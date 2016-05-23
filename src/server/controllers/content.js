@@ -112,7 +112,7 @@ exports.getContentByAppIdArticleId = function(req,res) {
     var appId = req.params.appId;
     var article_id = req.params.articleId;
     var internal = req.url.indexOf('internal');
-    console.log(appId);
+    //console.log(appId);
     if(true){
         db.query('SELECT * FROM '+ appId + ' where content_id = ? order by issue_date desc, issue_vol desc, issue_no desc',[article_id],function(err,rows){
             if(err) {
@@ -136,7 +136,7 @@ exports.getContentByAppIdArticleId = function(req,res) {
 //	connection.end();
 }
 exports.updateContent = function(req,res) {
-    console.log('update content called');
+    //console.log('update content called');
     var appId = req.params.appId;
     var content = req.body;
     var content_id = content.content_id;
@@ -148,7 +148,7 @@ exports.updateContent = function(req,res) {
                 res.send(err);
             }
             else {
-                res.send({'success':'content update'});
+                res.send({'success':'content updated'});
             }
     });
 }
@@ -193,7 +193,7 @@ function serialize(myArray){
 
     }
     serializedTokens = '"' +keywords.join('","') + '"';
-    console.log(serializedTokens);
+    //console.log(serializedTokens);
     return serializedTokens;
 }
 function deSerialize(myArray, tagText){
