@@ -12,7 +12,7 @@ mcmsApp.filter('searchAll', function($filter) {
             if ((articles[i].title==null?false:articles[i].title.toString().search(searchRegx) !== -1) ||
                 (articles[i].issue_vol ==null?false:articles[i].issue_vol.toString().search(searchRegx) !== -1) ||
                 (articles[i].issue_no ==null?false:articles[i].issue_no.toString().search(searchRegx) !== -1) ||
-                (articles[i].user_created ==null?false:articles[i].user_created.toString().search(searchRegx) !== -1) ||
+                (articles[i].created_by ==null?false:articles[i].created_by.toString().search(searchRegx) !== -1) ||
                 (articles[i].tags ==null?false:articles[i].tags.toString().search(searchRegx) !== -1) ||
                 $filter('date')(new Date(articles[i].issue_date),'MM/dd/yyyy').search(searchRegx) != -1)
                 {

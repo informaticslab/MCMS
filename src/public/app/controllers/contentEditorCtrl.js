@@ -27,8 +27,8 @@ $scope.onTimeSet = function (newDate, oldDate) {
     //$scope.identity.currentUser._id = '1';
     //$scope.identity.currentUser.displayName = 'Trung Nguyen';
 
-  //create an object with ID and displayName for user_created.
-  //$scope.contentdoc.user_created = {id:$scope.identity.currentUser._id, displayName: $scope.identity.currentUser.displayName};
+  //create an object with ID and displayName for created_by.
+  //$scope.contentdoc.created_by = {id:$scope.identity.currentUser._id, displayName: $scope.identity.currentUser.displayName};
 
 
 

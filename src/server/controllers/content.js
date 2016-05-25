@@ -1,4 +1,5 @@
 var db = require('../lib/mySQLConnection');
+var feed = require("feed-read");
 
 exports.getContentByAppId = function(req,res) {
     var formattedRows =[];
@@ -153,6 +154,42 @@ exports.updateContent = function(req,res) {
     });
 }
 
+exports.captureFeed = function() {
+    feed("http://t.cdc.gov/feed.aspx?feedid=100", function(err, articles) {
+        if (err) throw err;
+        // Each article has the following properties:
+        //
+        //   * "title"     - The article title (String).
+        //   * "author"    - The author's name (String).
+        //   * "link"      - The original article link (String).
+        //   * "content"   - The HTML content of the article (String).
+        //   * "published" - The date that the article was published (Date).
+        //   * "feed"      - {name, source, link}
+        //
+        for (var i = 0; i < 100; i++) {
+            var article = articles[i];
+            var contentdoc = JSON.parse(article.summary.replace(/issue-/g,'issue_').replace(/content-ver/g,'content_ver').replace(/schema-ver/g,'schema_ver').replace(/url/g,'article_url'));
+
+            contentdoc.date_created = article.published;
+            contentdoc.date_updated = contentdoc.date_created;
+            if (contentdoc.created_by == null) {
+                contentdoc.created_by = 'IIU'
+            }
+            contentdoc.tags = serialize(contentdoc.tags);
+            //db.query('insert into mmwr_express set ? on duplicate key update ?',[content,content],function(err,result){
+            db.query('insert into mmwr_express set ? ',[contentdoc],function(err,result){
+                if(err) {
+                    console.log(err);
+                }
+                else {
+                    console.log('content added');
+                }
+            })
+
+        }
+    });
+}
+
 function reformatRows(rows,internal){
     var newRows = [];
     var replaceList = {'issue_date':'issue-date','issue_vol': 'issue-vol','issue_no' : 'issue-no'};
@@ -176,7 +213,7 @@ function reformatRows(rows,internal){
             //delete tempObj.issue_vol;
             //delete tempObj.issue_no;
             delete tempObj.date_created;
-            delete tempObj.user_created;
+            delete tempObj.created_by;
         }
         newRows.push(tempObj);
     }
@@ -208,3 +245,4 @@ function deSerialize(myArray, tagText){
     }
     return mytags;
 }
+
