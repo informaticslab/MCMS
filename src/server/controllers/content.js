@@ -166,7 +166,7 @@ exports.captureFeed = function() {
         //   * "published" - The date that the article was published (Date).
         //   * "feed"      - {name, source, link}
         //
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < articles.length; i++) {
             var article = articles[i];
             var contentdoc = JSON.parse(article.summary.replace(/issue-/g,'issue_').replace(/content-ver/g,'content_ver').replace(/schema-ver/g,'schema_ver').replace(/url/g,'article_url'));
 

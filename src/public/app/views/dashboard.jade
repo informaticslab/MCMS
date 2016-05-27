@@ -1,0 +1,77 @@
+#page-wrapper
+    .container-fluid
+        // Page Heading
+        .row
+            .header.col-lg-12
+                h2.page-header
+                    | Active articles
+        // Page Content
+        .row
+            .col-lg-12
+                .table-responsive
+                    table.table.table-hover.tableCustom
+                        thead
+                            tr
+                                th
+                                    a(href="" ng-click="sortType = 'title'; sortReverse = !sortReverse; sortArticles('title')")
+                                        | Title
+                                        span(ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'title' &&  sortReverse" class="fa fa-caret-up")
+                                th
+                                    a(href="" ng-click="sortType = 'issue_date'; sortReverse = !sortReverse; sortArticles('issue_date')")
+                                        | Issue Date
+                                        span(ng-show="sortType == 'issue_date' &&  !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'issue_date' &&  sortReverse" class="fa fa-caret-up")
+                                th
+                                    a(href="" ng-click="sortType = 'issue_vol'; sortReverse = !sortReverse; sortArticles('issue_vol')")
+                                        | Issue Volume
+                                        span(ng-show="sortType == 'issue_vol' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'issue_vol' &&  sortReverse" class="fa fa-caret-up")
+                                th
+                                    a(href="" ng-click="sortType = 'issue_no'; sortReverse = !sortReverse; sortArticles('issue_no')")
+                                        | Issue No
+                                        span(ng-show="sortType == 'issue_no' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'issue_no' &&  sortReverse" class="fa fa-caret-up")
+                                th
+                                    a(href="" ng-click="sortType = 'date_created'; sortReverse = !sortReverse; sortArticles('date_created')")
+                                        | Created Date
+                                        span(ng-show="sortType == 'date_created' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'date_created' &&  sortReverse" class="fa fa-caret-up")
+                                th
+                                    a(href="" ng-click="sortType = 'date_updated'; sortReverse = !sortReverse; sortArticles('date_updated')")
+                                        | Last Update
+                                        span(ng-show="sortType == 'date_updated' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'date_updated' &&  sortReverse" class="fa fa-caret-up")
+                                //th
+                                //        | Keywords
+                                th
+                                    a(href="" ng-click="sortType = 'created_by'; sortReverse = !sortReverse; sortArticles('created_by')")
+                                        | Created By
+                                        span(ng-show="sortType == 'created_by' && !sortReverse" class="fa fa-caret-down")
+                                        span(ng-show="sortType == 'created_by' &&  sortReverse" class="fa fa-caret-up")
+                        tbody
+                             tr(ng-repeat="article in filarticles =(articles | searchAll : $parent.searchText) | limitTo: itemsPerPage : beginItem "  )
+                                td(ng-class-odd="'tableStripe'")
+                                    a(href="#/article/{{article.content_id}}" ){{article.title}}
+                                td(ng-class-odd="'tableStripe'")
+                                    | {{article.issue_date | date:'MM/dd/yyyy'}}
+                                td(ng-class-odd="'tableStripe'")
+                                    | {{article.issue_vol}}
+                                td(ng-class-odd="'tableStripe'")
+                                     | {{article.issue_no}}
+                                td(ng-class-odd="'tableStripe'")
+                                     | {{article.date_created | date:'MM/dd/yyyy'}}
+                                td(ng-class-odd="'tableStripe'")
+                                     | {{article.date_updated | date:'MM/dd/yyyy'}}
+                                //td(ng-class-odd="'tableStripe'")
+                                //    p(
+                                //     | {{article.tags}}
+                                td(ng-class-odd="'tableStripe'")
+                                    | {{article.created_by}}
+                                td(ng-if="identity.isAuthorized('levelTwo')")
+                                    a.del-edit-btn.btn.btn-default.btn-xs( href='', ng-click="deleteActive(instance)")
+                                        .glyphicon.glyphicon-trash
+        .row(ng-show='filarticles.length > itemsPerPage')
+            .col-lg-12
+                .text-center
+                    pagination.pagination-sm(total-items="filarticles.length", items-per-page='itemsPerPage', ng-model='currentPage', max-size='maxsize', boundary-links='true' ng-change="pageChanged()"  previous-text='‹' next-text='›' first-text='«' last-text='»')
